@@ -1,4 +1,13 @@
-{ stdenv, fetchpatch, looking-glass-client, looking-glass-host, lib, libbfd, obs-studio, libGLU, cmake, pkg-config, enableThreading ? false }: stdenv.mkDerivation {
+{ stdenv
+, fetchpatch
+, looking-glass-client, looking-glass-host
+, lib
+, libbfd
+, obs-studio, libGLU
+, cmake, pkg-config
+, enableThreading ? false
+, optimizeForArch ? null
+}: stdenv.mkDerivation {
   pname = "looking-glass-obs";
   inherit (looking-glass-host) src version;
   inherit (looking-glass-client) meta;
@@ -17,8 +26,10 @@
   buildInputs = [ libbfd obs-studio libGLU ];
 
   cmakeFlags = [
-    "-DOPTIMIZE_FOR_NATIVE=OFF"
+    "-DOPTIMIZE_FOR_NATIVE=${if optimizeForArch == null then "OFF" else optimizeForArch}"
     "-DENABLE_THREADS=${if enableThreading then "ON" else "OFF"}"
     "../obs"
   ];
+
+  hardeningDisable = [ "all" ];
 }
