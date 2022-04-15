@@ -7,8 +7,8 @@
       shift
 
       for flake in ${toString flakes}; do
-        echo ":: $ACTION $flake" >&2
-        nix "$ACTION" "$@" ./$flake
+        echo ":: flake $ACTION $flake" >&2
+        nix flake "$ACTION" "$@" ./$flake
       done
     '';
   in mkShell {

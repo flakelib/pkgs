@@ -3,38 +3,64 @@
     "arclib": {
       "inputs": {
         "flakelib": [
+          "arcpkgs",
           "flakelib"
         ],
         "nixpkgs": [
+          "arcpkgs",
           "nixpkgs"
         ]
       },
       "locked": {
         "narHash": "sha256-icNFQs8voaZeghC/jXNZkAz1ltll/U5BQjDc7WYYJBk=",
-        "path": "/nix/store/9xy7k4b9g7nh69843vn80xm5pkld5sa5-source/lib",
+        "path": "/nix/store/78kaa95mln5ijm2c8vbj96j1l12w1wr1-source/lib",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/9xy7k4b9g7nh69843vn80xm5pkld5sa5-source/lib",
+        "path": "/nix/store/78kaa95mln5ijm2c8vbj96j1l12w1wr1-source/lib",
+        "type": "path"
+      }
+    },
+    "arcpkgs": {
+      "inputs": {
+        "arclib": "arclib",
+        "arcpkgs-linux": "arcpkgs-linux",
+        "flakelib": [
+          "flakelib"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust": "rust"
+      },
+      "locked": {
+        "narHash": "sha256-F9iy40Ec3b/WwIZwqKoQ0/xYXeAOc32CGNUMwMtx7Ic=",
+        "path": "/nix/store/78kaa95mln5ijm2c8vbj96j1l12w1wr1-source",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/78kaa95mln5ijm2c8vbj96j1l12w1wr1-source",
         "type": "path"
       }
     },
     "arcpkgs-linux": {
       "inputs": {
         "flakelib": [
+          "arcpkgs",
           "flakelib"
         ],
         "nixpkgs": [
+          "arcpkgs",
           "nixpkgs"
         ]
       },
       "locked": {
         "narHash": "sha256-VtPoUHmWh5+TJM6fLxTFaflKRM+09rS0IVJG39MjCT0=",
-        "path": "/nix/store/9xy7k4b9g7nh69843vn80xm5pkld5sa5-source/linux",
+        "path": "/nix/store/78kaa95mln5ijm2c8vbj96j1l12w1wr1-source/linux",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/9xy7k4b9g7nh69843vn80xm5pkld5sa5-source/linux",
+        "path": "/nix/store/78kaa95mln5ijm2c8vbj96j1l12w1wr1-source/linux",
         "type": "path"
       }
     },
@@ -73,11 +99,9 @@
     },
     "root": {
       "inputs": {
-        "arclib": "arclib",
-        "arcpkgs-linux": "arcpkgs-linux",
+        "arcpkgs": "arcpkgs",
         "flakelib": "flakelib",
-        "nixpkgs": "nixpkgs",
-        "rust": "rust"
+        "nixpkgs": "nixpkgs"
       }
     },
     "rust": {
