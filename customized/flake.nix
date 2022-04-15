@@ -27,7 +27,7 @@
     arcpkgs = {
       url = "../";
       inputs = {
-        nixpkgs.follows = "github:NixOS/nixpkgs";
+        nixpkgs.follows = "nixpkgs";
         arclib.follows = "arclib";
       };
     };
