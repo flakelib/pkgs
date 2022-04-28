@@ -12,7 +12,7 @@
     '';
     impure = true;
     environment = [ "CI_PLATFORM" ];
-    meta.broken = name == "personal";
+    meta.broken = name == "base16";
   };
 in {
   name = "flakes.nix";
