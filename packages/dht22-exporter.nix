@@ -18,4 +18,8 @@ buildPythonApplication rec {
     configargparse
     prometheus_client
   ];
+
+  meta = {
+    inherit (adafruit-dht-python.meta) platforms;
+  };
 }

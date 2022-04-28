@@ -24,5 +24,8 @@
   buildInputs = [ obs-studio qtbase ffmpeg ];
   dontWrapQtApps = true;
 
-  meta.broken = lib.versionOlder obs-studio.version "27";
+  meta = {
+    inherit (obs-studio.meta) platforms;
+    broken = lib.versionOlder obs-studio.version "27";
+  };
 }

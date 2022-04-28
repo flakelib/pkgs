@@ -26,4 +26,8 @@ in stdenv.mkDerivation rec {
   '';
 
   passthru.ci.skip = true;
+  meta = {
+    homepage = "https://www.techpowerup.com/download/nvidia-nvflash/";
+    platforms = [ "aarch64-linux" "x86_64-linux" "i686-linux" "powerpc64le-linux" ];
+  };
 }

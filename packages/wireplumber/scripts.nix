@@ -37,5 +37,8 @@ in rustPlatform.buildRustPackage {
     "-I${stdenv.cc.libc.dev}/include"
   ];
 
-  meta.broken = versionOlder rustPlatform.rust.rustc.version "1.57";
+  meta = {
+    inherit (wireplumber.meta) platforms;
+    broken = versionOlder rustPlatform.rust.rustc.version "1.57";
+  };
 }

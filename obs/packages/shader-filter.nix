@@ -19,4 +19,8 @@
   buildInputs = [ obs-studio ffmpeg qtbase ];
 
   dontWrapQtApps = true;
+
+  meta = {
+    inherit (obs-studio.meta) platforms;
+  };
 }

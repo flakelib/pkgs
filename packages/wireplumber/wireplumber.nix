@@ -52,5 +52,8 @@ in stdenv.mkDerivation rec {
     "-Dsystemd-system-service=true"
   ];
 
-  meta.broken = lib.versionOlder pipewire.version "0.3.37";
+  meta = {
+    broken = lib.versionOlder pipewire.version "0.3.37";
+    platforms = lib.platforms.linux;
+  };
 }

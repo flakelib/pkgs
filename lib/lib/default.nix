@@ -1,4 +1,4 @@
-{ nixpkgs, lib }: let arclib = with lib; {
+{ inputs, lib }: let arclib = with lib; {
   arclib = arclib // {
     path = ./.;
   };
@@ -10,9 +10,9 @@
   # (note: true for paths and strings that look like paths)
   isPathLike = types.path.check;
 
-  isPath = nixpkgs.lib.isPath or builtins.isPath or isPathLike;
+  isPath = inputs.nixpkgs.lib.isPath or builtins.isPath or isPathLike;
 
-  isFloat = nixpkgs.lib.isFloat or builtins.isFloat or (f:
+  isFloat = inputs.nixpkgs.lib.isFloat or builtins.isFloat or (f:
     (builtins.tryEval (builtins.match "[0-9]*\\.[0-9]+" (toString f) != null)).value
   );
 
@@ -122,10 +122,10 @@
   in if super' ? extend then super'.extend overlay'
     else makeExtensible (self: super' // flip overlay' super' self);
 
-  composeExtensions = nixpkgs.lib.composeExtensions or (previous: overlay: pself: psuper: let
+  composeExtensions = inputs.nixpkgs.lib.composeExtensions or (previous: overlay: pself: psuper: let
     psuper' = previous pself psuper;
   in psuper' // overlay pself (psuper // psuper'));
-  composeManyExtensions = nixpkgs.lib.composeManyExtensions or (overlays: if overlays != [ ]
+  composeManyExtensions = inputs.nixpkgs.lib.composeManyExtensions or (overlays: if overlays != [ ]
     then foldl composeExtensions (head overlays) (tail overlays)
     else _: _: { });
 

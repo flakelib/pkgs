@@ -221,6 +221,7 @@
   , xorg'libxcb
   , udev
   , python3
+  , lib
   }: rustPlatform.buildRustPackage rec {
     pname = "screenstub";
     version = "2021-09-09";
@@ -238,6 +239,8 @@
     cargoSha256 = "02lyv08p78bvq5yss5fb1c5g1b4j9g331jr19dx18r06g4lsj9ja";
 
     doCheck = false;
+
+    meta.platforms = lib.platforms.linux;
   };
 
   ladspa-rnnoise = {

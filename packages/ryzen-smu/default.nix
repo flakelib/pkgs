@@ -1,7 +1,7 @@
 {
-  ryzen-smu-monitor_cpu = { stdenv, ryzen-smu, libsmu }: stdenv.mkDerivation {
+  ryzen-smu-monitor_cpu = { stdenv, libsmu }: stdenv.mkDerivation {
     pname = "ryzen-smu-userspace";
-    inherit (ryzen-smu) meta version src;
+    inherit (libsmu) meta version src;
 
     buildInputs = [ libsmu ];
 
@@ -15,9 +15,17 @@
     '';
   };
 
-  libsmu = { stdenv, ryzen-smu }: stdenv.mkDerivation {
+  libsmu = { lib, stdenv, fetchFromGitLab }: stdenv.mkDerivation {
     pname = "libsmu";
-    inherit (ryzen-smu) meta version src;
+    version = "2021-04-21";
+
+    src = fetchFromGitLab {
+      owner = "leogx9r";
+      repo = "ryzen_smu";
+      #rev = "v${version}";
+      rev = "847caf27a1e05bfcb546e4456572ed2bc4ffd262";
+      sha256 = "1xcrdwdkk7ijhiqix5rmz59cfps7p0x7gwflhqdcjm6np0ja3acv";
+    };
 
     makeFlags = [ "-C userspace" ];
 
@@ -28,12 +36,14 @@
       install -Dm0755 -t $out/lib/ libsmu.so
       install -Dm0644 -t $out/include/ lib/libsmu.h
     '';
+
+    meta.platforms = lib.platforms.linux;
   };
 
-  ryzen-smu-scripts = { python3Packages, ryzen-smu }: with python3Packages; let
+  ryzen-smu-scripts = { python3Packages, libsmu }: with python3Packages; let
     cpuid = buildPythonPackage {
       pname = "ryzen-smu-cpuid";
-      inherit (ryzen-smu) src version meta;
+      inherit (libsmu) src version meta;
 
       passAsFile = [ "setup" ];
       setup = ''
@@ -55,7 +65,7 @@
     };
   in buildPythonApplication {
     pname = "ryzen-smu-scripts";
-    inherit (ryzen-smu) meta version src;
+    inherit (libsmu) meta version src;
 
     propagatedBuildInputs = [ cpuid ];
 
@@ -71,6 +81,7 @@
       setup(
         name='@pname@',
         version='@version@',
+        packages=[],
         install_requires = ['ryzen-smu-cpuid'],
         scripts = [
           'scripts/dump_pm_table.py',
@@ -92,7 +103,7 @@
       inherit cpuid;
     };
   };
-  ryzen-monitor = { stdenv, fetchFromGitHub, ryzen-smu, libsmu }: stdenv.mkDerivation {
+  ryzen-monitor = { stdenv, fetchFromGitHub, libsmu }: stdenv.mkDerivation {
     pname = "ryzen-monitor";
     version = "2021-05-16";
 
@@ -119,5 +130,9 @@
     installPhase = ''
       install -Dm0755 -t $out/bin/ src/ryzen_monitor
     '';
+
+    meta = {
+      inherit (libsmu.meta) platforms;
+    };
   };
 }

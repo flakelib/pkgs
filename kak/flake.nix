@@ -11,8 +11,12 @@
       };
     };
   };
-  outputs = { flakelib, ... }@inputs: flakelib {
+  outputs = { self, flakelib, ... }@inputs: flakelib {
     inherit inputs;
+    config = {
+      name = "kakounePlugins";
+      packages.namespace = self.flakes.config.name;
+    };
     builders = import ./builders.nix;
     packages = import ./packages.nix;
   };

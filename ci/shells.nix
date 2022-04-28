@@ -14,4 +14,5 @@
   in mkShell {
     nativeBuildInputs = [ nix-all ];
   };
+  default = { outputs'devShells'maintenance }: outputs'devShells'maintenance;
 }

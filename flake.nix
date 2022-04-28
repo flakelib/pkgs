@@ -10,13 +10,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    arcpkgs-linux = {
-      url = "./linux";
-      inputs = {
-        flakelib.follows = "flakelib";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     rust = {
       url = "github:arcnmx/nixexprs-rust";
       flake = false;
@@ -27,6 +20,5 @@
     builders = import ./builders;
     packages = import ./packages;
     devShells = import ./ci/shells.nix;
-    devShell = { inputs, buildConfig }: inputs.self.devShells.${buildConfig.localSystem.system}.maintenance;
   };
 }

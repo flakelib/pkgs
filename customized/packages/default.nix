@@ -354,8 +354,8 @@ let
       src = fetchFromGitHub {
         owner = "mortie";
         repo = "swaylock-effects";
-        rev = "5cb9579faaf5662b111f5722311b701eff1c1d00";
-        sha256 = "036dkhfqgk7g9vbr5pxgrs66h5fz0rwdsc67i1w51aa9v01r35ca";
+        rev = "a8fc557b86e70f2f7a30ca9ff9b3124f89e7f204";
+        sha256 = "0f9571blnn7lg317js1j1spc5smz69i5aw6zkhskkm5m633rrpqq";
       };
 
       patches = [
@@ -487,10 +487,19 @@ let
         name = "qemu-cpu-pinning.patch";
         url = "https://github.com/64kramsystem/qemu-pinning/commit/e3d3d8a836d5dd4d385def2959abae0eb23a1d69.patch";
         sha256 = "04lbhhp2dcy38zzy4qx2w55af2j1s144ibka6d0k9pqya0d040d5";
-      }) ++ lib.optional (lib.versionAtLeast qemu.version "6.2") (fetchpatch {
+      }) ++ lib.optional (lib.versionAtLeast qemu.version "6.2" && lib.versionOlder qemu.version "7.0") (fetchpatch {
         name = "qemu-cpu-pinning.patch";
         url = "https://github.com/arcnmx/qemu/commit/3f466242dc8f7cbefdc2d56a71e4f8a9682eee2a.patch";
         sha256 = "04g7m73d8jynfi1lric0vmkhbgdh24vclx08nal439y8qnfjzya9";
+      }) ++ lib.optional (lib.versionAtLeast qemu.version "7.0") (fetchpatch {
+        name = "qemu-cpu-pinning.patch";
+        url = "https://github.com/64kramsystem/qemu-pinning/commit/851970fe429b9ff8c24e935864bb8e7c235b1187.patch";
+        sha256 = "1732rxx1wsrx9nycpja4ixxhqn9sxv9sgdgylgqqybbzcl716hkg";
+      }) ++ lib.optional (qemu.version == "7.0.0") (fetchpatch {
+        # https://gitlab.com/qemu-project/qemu/-/issues/997
+        name = "iothread-spin.patch";
+        url = "https://github.com/arcnmx/qemu/commit/fd3a94d18d8a8133ccdeb7048e8da7e84ce232db.patch";
+        sha256 = "0rqprr1p9b7r07q9gr14y6z4i11nx7lr9x9ggci1lrwm89kj14nw";
       }) ++ lib.singleton (fetchpatch {
         name = "qemu-smb-symlinks.patch";
         url = "https://github.com/64kramsystem/qemu-pinning/commit/646a58799e0791c4074148a21d57786f100b7076.patch";

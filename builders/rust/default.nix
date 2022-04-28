@@ -2,8 +2,8 @@ let
   rustPlatformFor = { rustPlatform, ... }: rustPlatform;
 
   builders = {
-    rustChannel = { inputs'rust, nixpkgs }: import inputs'rust {
-      pkgs = nixpkgs.packages;
+    rustChannel = { inputs'rust, nixpkgs'pkgs }: import inputs'rust {
+      pkgs = nixpkgs'pkgs;
     };
     rustPlatforms = { rustChannel, lib }: with lib;
       mapAttrs (_: rustPlatformFor) rustChannel.releases // {

@@ -45,4 +45,8 @@
 
     runHook postInstall
   '';
+
+  meta = {
+    inherit (obs-studio.meta) platforms;
+  };
 }

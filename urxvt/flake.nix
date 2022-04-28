@@ -4,8 +4,12 @@
     flakelib.url = "github:flakelib/fl";
     nixpkgs.url = "github:NixOS/nixpkgs";
   };
-  outputs = { flakelib, ... }@inputs: flakelib {
+  outputs = { self, flakelib, ... }@inputs: flakelib {
     inherit inputs;
     packages = import ./packages;
+    config = {
+      name = "rxvt-unicode-plugins";
+      packages.namespace = self.flakes.config.name;
+    };
   };
 }
