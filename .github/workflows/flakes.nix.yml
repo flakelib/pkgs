@@ -15,12 +15,6 @@ jobs:
     - id: nix-install
       name: nix install
       uses: arcnmx/ci/actions/nix/install@nix2.4-broken
-    - id: ci-setup
-      name: nix setup
-      uses: arcnmx/ci/actions/nix/run@nix2.4-broken
-      with:
-        attrs: ci.run.setup
-        quiet: false
     - id: ci-dirty
       name: nix test dirty
       uses: arcnmx/ci/actions/nix/run@nix2.4-broken
