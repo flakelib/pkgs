@@ -1,5 +1,13 @@
 {
   i3gopher = import ./i3gopher;
+  i3gopher-sway = { i3gopher }: i3gopher.override {
+    enableI3 = false;
+    enableSway = true;
+  };
+  i3gopher-i3 = { i3gopher }: i3gopher.override {
+    enableI3 = true;
+    enableSway = false;
+  };
   glauth = import ./glauth.nix;
   konawall = import ./konawall.nix;
   paswitch = import ./paswitch.nix;

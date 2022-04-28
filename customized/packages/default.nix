@@ -120,7 +120,7 @@ let
       };
     });
 
-    imv-develop = { imv, fetchFromGitHub, fetchpatch }: imv.overrideAttrs (old: {
+    imv-develop = { lib, imv, fetchFromGitHub, fetchpatch }: imv.overrideAttrs (old: {
       version = "2021-07-29";
       src = fetchFromGitHub {
         owner = "eXeC64";
@@ -128,17 +128,10 @@ let
         rev = "b194997c20fb1ade3aa2828676ca85a2738a8f3e";
         sha256 = "1jp5glqigq6mq6awamja9av83imsrp2c7731rprflvrj6i7sff7z";
       };
+      meta = old.meta or { } // {
+        platforms = lib.platforms.linux;
+      };
     });
-
-    i3gopher-sway = { i3gopher }: i3gopher.override {
-      enableI3 = false;
-      enableSway = true;
-    };
-
-    i3gopher-i3 = { i3gopher }: i3gopher.override {
-      enableI3 = true;
-      enableSway = false;
-    };
 
     notmuch-arc = { lib, notmuch, coreutils, hostPlatform }: let
       drv = notmuch.override {
@@ -300,16 +293,16 @@ let
       '';
     });
 
-    weechat-arc = { lib, wrapWeechat, weechat-unwrapped, weechatScripts, python3Packages, arcpkgs-weechat }: let
+    weechat-arc = { lib, wrapWeechat, weechat-unwrapped, weechatScripts, python3Packages }: let
       filterBroken = lib.filter (s: ! s.meta.broken or false && s.meta.available or true); # matrix-nio is often broken
       weechat-wrapped = (wrapWeechat.override { inherit python3Packages; }) weechat-unwrapped {
         configure = { availablePlugins, ... }: {
           plugins = with availablePlugins; [
-            (python.withPackages (ps: with ps; with arcpkgs-weechat; filterBroken [
+            (python.withPackages (ps: with ps; with weechatScripts; filterBroken [
               weechat-matrix-python
             ]))
           ];
-          scripts = with weechatScripts; with arcpkgs-weechat; filterBroken [
+          scripts = with weechatScripts; filterBroken [
             weechat-go auto_away autoconf weechat-autosort colorize_nicks unread_buffer urlgrab vimode-develop weechat-matrix
           ];
         };
@@ -547,7 +540,7 @@ let
       };
     });
 
-    xkeyboard-config-arc = { xkeyboard_config, fetchpatch, utilmacros, autoreconfHook }: xkeyboard_config.overrideAttrs (old: rec {
+    xkeyboard-config-arc = { xkeyboard_config, fetchpatch, xorg'utilmacros, autoreconfHook }: xkeyboard_config.overrideAttrs (old: rec {
       pname = "xkeyboard-config-arc";
       #name = "${pname}-${old.version}";
       patches = old.patches or [ ] ++ [
@@ -557,7 +550,7 @@ let
         })
       ];
 
-      nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ autoreconfHook utilmacros ];
+      nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ autoreconfHook xorg'utilmacros ];
     });
 
     mosh-client = { mosh, stdenvNoCC }: stdenvNoCC.mkDerivation {
