@@ -27,6 +27,7 @@
     arcpkgs = {
       url = "../";
       inputs = {
+        flakelib.follows = "flakelib";
         nixpkgs.follows = "nixpkgs";
         arclib.follows = "arclib";
       };

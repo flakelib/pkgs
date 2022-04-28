@@ -10,12 +10,13 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-icNFQs8voaZeghC/jXNZkAz1ltll/U5BQjDc7WYYJBk=",
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/lib",
+        "lastModified": 1,
+        "narHash": "sha256-S2uOSxZ9ZSPfKz35pWPbOD5cKpnlIgNtlVvEyq5c2Tw=",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source/lib",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/lib",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source/lib",
         "type": "path"
       }
     },
@@ -24,41 +25,22 @@
         "arclib": [
           "arclib"
         ],
-        "arcpkgs-linux": "arcpkgs-linux",
-        "flakelib": "flakelib",
+        "flakelib": [
+          "flakelib"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
         "rust": "rust"
       },
       "locked": {
-        "narHash": "sha256-tOLrwrNBhjWxd13xmAAhKrzOq5es3lgBvR55JMISE3I=",
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source",
+        "lastModified": 0,
+        "narHash": "sha256-UeVHWn+9ZV0QijpHyigbwXikWV0sFvkCxoOVZicZtWw=",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source",
-        "type": "path"
-      }
-    },
-    "arcpkgs-linux": {
-      "inputs": {
-        "flakelib": [
-          "arcpkgs",
-          "flakelib"
-        ],
-        "nixpkgs": [
-          "arcpkgs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "narHash": "sha256-7DMziTd9nZ1zOy40sRZeO2x8XtCV3kmYBNa7sSL6ZhE=",
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/linux",
-        "type": "path"
-      },
-      "original": {
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/linux",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source",
         "type": "path"
       }
     },
@@ -72,43 +54,39 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-Em5dZThyeTEmQscYC1hgeBCGfGZPGf03of7amElK3Ek=",
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/weechat",
+        "lastModified": 1,
+        "narHash": "sha256-c6R2R4YVnAHZxz2N8YIG9pgMwZ+lVnWYWkI3ejF7MpU=",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source/weechat",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/weechat",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source/weechat",
+        "type": "path"
+      }
+    },
+    "fl-config": {
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-PvB9ha0r4w6p412MBPP71kS/ZTBnOjxL0brlmyucPBA=",
+        "path": "/nix/store/jwm4cjwv2amks1k6kz17wbfb7dqiyqdw-source/config",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/jwm4cjwv2amks1k6kz17wbfb7dqiyqdw-source/config",
         "type": "path"
       }
     },
     "flakelib": {
       "inputs": {
+        "fl-config": "fl-config",
         "std": "std"
       },
       "locked": {
-        "lastModified": 1649977978,
-        "narHash": "sha256-G8oW/L4QGSsle2QhVAVaAesrvo3sTm6hmX9gC3iWArA=",
+        "lastModified": 1651168809,
+        "narHash": "sha256-Gvf0LEBvbT1YD1AIPXt7Wf8UAkhr4y2VqOOQHqhIVOY=",
         "owner": "flakelib",
         "repo": "fl",
-        "rev": "a48dbcdf3b8714f24aef54170229c42644021988",
-        "type": "github"
-      },
-      "original": {
-        "owner": "flakelib",
-        "repo": "fl",
-        "type": "github"
-      }
-    },
-    "flakelib_2": {
-      "inputs": {
-        "std": "std_2"
-      },
-      "locked": {
-        "lastModified": 1649977978,
-        "narHash": "sha256-G8oW/L4QGSsle2QhVAVaAesrvo3sTm6hmX9gC3iWArA=",
-        "owner": "flakelib",
-        "repo": "fl",
-        "rev": "a48dbcdf3b8714f24aef54170229c42644021988",
+        "rev": "0d931ef1c59d8dc397e89d998c5587383507613e",
         "type": "github"
       },
       "original": {
@@ -119,11 +97,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1649986325,
-        "narHash": "sha256-NeLllJAle+OCkOTgkPwNYSmIe3kvvoYujNJdJmBd14Y=",
+        "lastModified": 1651167410,
+        "narHash": "sha256-mVI2uRY3Rf6WS7iowNH3zdyhqSemRsksSMgAwZC8Y6w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "29014d65aaa3ca36ce66e2ae733b044cf4c94fd7",
+        "rev": "c752103dd14c6baf4c00a6f2c1b689bdd9cd9b88",
         "type": "github"
       },
       "original": {
@@ -137,7 +115,7 @@
         "arclib": "arclib",
         "arcpkgs": "arcpkgs",
         "arcpkgs-weechat": "arcpkgs-weechat",
-        "flakelib": "flakelib_2",
+        "flakelib": "flakelib",
         "nixpkgs": "nixpkgs",
         "rxvt-unicode-plugins": "rxvt-unicode-plugins"
       }
@@ -168,37 +146,23 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-Aa8z7RrT+QcS4IWKrO5YcS3dv7opYk5I7gqClmQOJuY=",
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/urxvt",
+        "lastModified": 1,
+        "narHash": "sha256-jmsSdf2Pf7BZq4aZI4cvpKZY5vBbK4G3+nBaR3d00f8=",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source/urxvt",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/2zsqs7596yqwgbbdj541syb8fhqwjc45-source/urxvt",
+        "path": "/nix/store/gy6smk3nfdpw4qpli8kqks6n2b8g18pm-source/urxvt",
         "type": "path"
       }
     },
     "std": {
       "locked": {
-        "lastModified": 1649814279,
-        "narHash": "sha256-laOWeW3D9laGwRRZq+1xtm8R9ZBHaVsZ7S3nYegiUjs=",
+        "lastModified": 1651163764,
+        "narHash": "sha256-K7IH09asq+J9V7jFiW+FiOizoXByh9SQo/vJ0IUJPJQ=",
         "owner": "flakelib",
         "repo": "std",
-        "rev": "d614857f99c79a32e30ab190c0eb1bac0b1164e4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "flakelib",
-        "repo": "std",
-        "type": "github"
-      }
-    },
-    "std_2": {
-      "locked": {
-        "lastModified": 1649814279,
-        "narHash": "sha256-laOWeW3D9laGwRRZq+1xtm8R9ZBHaVsZ7S3nYegiUjs=",
-        "owner": "flakelib",
-        "repo": "std",
-        "rev": "d614857f99c79a32e30ab190c0eb1bac0b1164e4",
+        "rev": "27ece8838134ac6532fd34363d6de51fc7d77ec7",
         "type": "github"
       },
       "original": {
