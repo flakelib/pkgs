@@ -6,6 +6,10 @@
   };
   outputs = { flakelib, ... }@inputs: flakelib {
     inherit inputs;
+    config = {
+      name = "arclib";
+      lib.namespace = [ ];
+    };
     lib = import ./lib;
   };
 }
