@@ -19,7 +19,9 @@
     "flakelib": {
       "inputs": {
         "fl-config": "fl-config",
-        "std": "std"
+        "std": [
+          "std"
+        ]
       },
       "locked": {
         "lastModified": 1653175637,
@@ -53,11 +55,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1653445880,
-        "narHash": "sha256-leKRC6mTP/WI49fKuwmXVfe1eIXtMSBcIzdIpkWHMoA=",
+        "lastModified": 1653518111,
+        "narHash": "sha256-JA1yCAXlmvZXId5BLGC0T/+pLqByWr5PwLCj8TvhWyw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "cef38c94886c2f40e5653a2ba6830632a6136bf8",
+        "rev": "af02d617c737c385aad1789d0de1d9e6a4e608e7",
         "type": "github"
       },
       "original": {
@@ -69,7 +71,8 @@
     "root": {
       "inputs": {
         "flakelib": "flakelib",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "std": "std"
       }
     },
     "std": {
@@ -77,11 +80,11 @@
         "nix-std": "nix-std"
       },
       "locked": {
-        "lastModified": 1653157927,
-        "narHash": "sha256-wT2L4XBu58vu8eKOvLfGK/2h4gwDjhTdLTQbGos1BlU=",
+        "lastModified": 1653520674,
+        "narHash": "sha256-eXi2VK6LXyywc+HI4IsrNAeQv/NIvWk3gqil8g9UlQw=",
         "owner": "flakelib",
         "repo": "std",
-        "rev": "f80d5bedb74de5722a813a9680fa8491817a05b4",
+        "rev": "5736fb0966eb0194bcd765a52abb3c6a429491ea",
         "type": "github"
       },
       "original": {

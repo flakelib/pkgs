@@ -1,26 +1,41 @@
 {
   description = "base16";
   inputs = {
-    flakelib.url = "github:flakelib/fl";
+    flakelib = {
+      url = "github:flakelib/fl";
+      inputs.std.follows = "std";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs";
+    std.url = "github:flakelib/std";
   };
   outputs = { flakelib, ... }@inputs: flakelib {
     inherit inputs;
     config = {
       name = "base16";
+      packages.namespace = [ "base16" ];
+      inputs = {
+        std.lib.namespace = [ "std" ];
+      };
     };
     lib = import ./lib;
     builders = import ./builders.nix;
     packages = import ./packages;
-    legacyPackages = {
-      base16-templates = import ./packages/templates.nix;
+    defaultPackage = "base16-shell-preview";
+    legacyPackages = { callPackage }: {
+      templates = callPackage ./packages/templates.nix { };
     };
-    nixosModules.base16 = import ./nixos.nix;
+    nixosModules = { callPackageSet }: {
+      base16 = callPackageSet ./nixos.nix { };
+    };
     nixosModule = "base16";
     outputs.homeModules = {
-      value.base16 = import ./home.nix;
+      value = { callPackageSet }: {
+        base16 = callPackageSet ./home.nix { };
+      };
       default = "base16";
     };
-    outputs.modules.value.base16 = import ./module.nix;
+    outputs.modules.value = { callPackageSet }: {
+      base16 = callPackageSet ./module.nix { };
+    };
   };
 }

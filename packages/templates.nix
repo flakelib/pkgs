@@ -1,8 +1,9 @@
 { lib
-, base16, base16-templates-source, base16-schemes
+, buildTemplate, repoSrc, templates-source, schemes
 , symlinkJoin
 }: with lib; let
-  inherit (base16-templates-source) sources;
+  inherit (lib.std) Drv;
+  inherit (templates-source) sources;
   mapRepo = slug: repo: let
     addPassthru = drv: {
       import = import "${drv.nix}";
@@ -11,27 +12,28 @@
         content = builtins.readFile path;
       }) repo.config;
     };
-    build = templateData: base16.buildTemplate {
+    build = templateData: buildTemplate {
       pname = "base16-template-${slug}-${templateData.scheme-slug}";
       inherit slug templateData;
       inherit (repo) version;
-      src = base16.repoSrc repo;
+      src = repoSrc repo;
 
       passthru = {
         inherit repo;
         inherit (templateData) scheme-slug;
       };
     };
-    withTemplateData = templateData: drvPassthru addPassthru (build templateData);
-    schemes = mapAttrs (schemeSlug: scheme:
-      withTemplateData (lib.base16.evalScheme scheme.data).templateData
-    ) base16-schemes.all;
+    withTemplateData = templateData: Drv.fixPassthru addPassthru (build templateData);
+    schemes' = mapAttrs (schemeSlug: scheme:
+      withTemplateData (base16.evalScheme scheme.data).templateData
+    ) schemes.all;
     combined = symlinkJoin {
       name = "base16-${slug}";
-      paths = attrValues schemes;
+      paths = attrValues schemes';
     };
   in combined // {
-    inherit withTemplateData schemes;
+    inherit withTemplateData;
+    schemes = schemes';
   };
 in /*dontRecurseIntoAttrs*/ (mapAttrs mapRepo sources) // {
   inherit sources;

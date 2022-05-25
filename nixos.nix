@@ -1,9 +1,9 @@
-{ inputs'self, lib'base16 }: { pkgs, config, lib, ... }: let
+{ inputs'self, lib'std, lib'base16 }: { pkgs, config, lib, ... }: let
+  inherit (lib'std) Str UInt List;
   cfg = config.base16;
   base16 = lib.base16 or lib'base16;
-  toHexUpper = throw "TODO";
-  concatImap0Strings = throw "TODO";
-  makeColorCS = n: value: "\\e]P${toHexUpper n}${value}";
+  concatImap0Strings = f: list: Str.concat (List.imap f list);
+  makeColorCS = n: value: "\\e]P${UInt.toHexUpper n}${value}";
 in with lib; {
   imports = [
     (import ./home.nix { inherit inputs'self lib'base16; isNixos = true; })

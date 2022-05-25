@@ -1,8 +1,9 @@
 { lib
-, base16, base16-schemes-source
+, buildScheme, repoSrc, schemes-source
 , symlinkJoin
 }: with lib; let
-  inherit (base16-schemes-source) sources;
+  inherit (lib.std) Drv;
+  inherit (schemes-source) sources;
   mapRepo = slug: repo: let
     schemeNames = repo.schemes or (singleton slug);
     addPassthru = drv: {
@@ -12,16 +13,16 @@
         data = importJSON path;
       });
     };
-    drv = base16.buildScheme {
+    drv = buildScheme {
       inherit slug;
       inherit (repo) version;
-      src = base16.repoSrc repo;
+      src = repoSrc repo;
 
       passthru = {
         inherit schemeNames repo;
       };
     };
-  in lib.drvPassthru addPassthru drv;
+  in Drv.fixPassthru addPassthru drv;
   schemes = mapAttrs mapRepo sources;
   all = symlinkJoin {
     name = "base16-schemes";

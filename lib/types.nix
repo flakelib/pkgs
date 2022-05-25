@@ -1,4 +1,5 @@
 { lib }: with lib; let
+  inherit (lib.std) UInt;
   colourValueType = with types; oneOf [ str ints.u8 ];
   colourComponentModule = { options, config, ... }: let
     calculated16 = byte: byte * 256 + (if byte >= 128 then 255 else 0); # skews the value toward 0 or 0xffff
@@ -10,15 +11,15 @@
       };
       hex4 = mkOption {
         type = types.str;
-        default = toHex config.nibble;
+        default = UInt.toHex config.nibble;
       };
       hex = mkOption {
         type = types.str;
-        default = fixedWidthString 2 "0" (toHex config.byte);
+        default = fixedWidthString 2 "0" (UInt.toHex config.byte);
       };
       hex16 = mkOption {
         type = types.str;
-        default = fixedWidthString 4 "0" (toHex config.int16);
+        default = fixedWidthString 4 "0" (UInt.toHex config.int16);
       };
       nibble = mkOption {
         type = types.ints.between 0 15;
@@ -49,10 +50,10 @@
     config = {
       byte = mkMerge [
         (mkIf (options.value.isDefined && isInt config.value) (mkDefault config.value))
-        (mkIf (options.value.isDefined && isString config.value && stringLength config.value == 2) (mkDefault (hexToInt config.value)))
-        (mkIf (options.value.isDefined && isString config.value && stringLength config.value < 2) (mkDefault (calculated8 (hexToInt config.value))))
+        (mkIf (options.value.isDefined && isString config.value && stringLength config.value == 2) (mkDefault (UInt.FromHex config.value)))
+        (mkIf (options.value.isDefined && isString config.value && stringLength config.value < 2) (mkDefault (calculated8 (UInt.FromHex config.value))))
       ];
-      int16 = mkIf (options.value.isDefined && isString config.value && stringLength config.value > 2) (mkDefault (hexToInt config.value));
+      int16 = mkIf (options.value.isDefined && isString config.value && stringLength config.value > 2) (mkDefault (UInt.FromHex config.value));
       set = mapAttrs (_: mkDefault) (if config.has16Bit then {
         inherit (config) int16;
       } else {
