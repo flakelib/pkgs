@@ -1,4 +1,4 @@
-{ inputs'self'modules'base16, lib'base16 }: { pkgs, config, lib, ... }: let
+{ inputs'self, lib'base16 }: { pkgs, config, lib, ... }: let
   cfg = config.base16;
   base16 = lib.base16 or lib'base16;
   toHexUpper = throw "TODO";
@@ -6,7 +6,7 @@
   makeColorCS = n: value: "\\e]P${toHexUpper n}${value}";
 in with lib; {
   imports = [
-    (import ./home.nix { inherit inputs'self'modules'base16 lib'base16; isNixos = true; })
+    (import ./home.nix { inherit inputs'self lib'base16; isNixos = true; })
   ];
 
   options.console.getty = {

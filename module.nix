@@ -1,6 +1,6 @@
-{ lib'base16 }: { lib, config, options, pkgs, ... }: with lib; let
+{ inputs'self, lib'base16 }: { lib, config, options, pkgs, ... }: with lib; let
   cfg = config;
-  base16-schemes = pkgs.base16-schemes or (throw "TODO: base16-schemes");
+  base16-schemes = pkgs.base16-schemes or (inputs'self.flakes.import { inherit pkgs; }).packages.base16-schemes;
   base16 = lib.base16 or lib'base16;
   mapBase16 = f: mapAttrs (_: f) (getAttrs base16.names config // config.aliases);
 in {

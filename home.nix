@@ -1,9 +1,9 @@
-{ inputs'self'modules'base16, lib'base16, isNixos ? false }: { pkgs, config, options, lib, ... }: with lib; let
+{ inputs'self, lib'base16, isNixos ? false }: { pkgs, config, options, lib, ... }: with lib; let
   cfg = config.base16;
   opts = options.base16;
   defaultScheme = cfg.schemes.${cfg.defaultSchemeName};
   base16 = lib.base16 or lib'base16;
-  base16-templates = pkgs.base16-templates or (throw "TODO: base16-templates");
+  base16-templates = pkgs.base16-templates or (inputs'self.flakes.import { inherit pkgs; }).legacyPackages.base16-templates;
   shellScripts = mapAttrs (key: scheme: pkgs.writeShellScriptBin "base16-${scheme.slug}" scheme.ansi.shellScript) cfg.schemes;
   termModule = { config, ... }: {
     config = {
@@ -18,7 +18,7 @@ in {
     schemes = mkOption {
       type = with types; let
         module = submodule [
-          inputs'self'modules'base16
+          inputs'self.modules.base16
           termModule
           compatModule
         ];

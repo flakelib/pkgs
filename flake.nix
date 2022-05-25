@@ -12,11 +12,15 @@
     lib = import ./lib;
     builders = import ./builders.nix;
     packages = import ./packages;
-    nixosModules = import ./nixos.nix;
-    outputs.homeModules.value = import ./home.nix;
-    outputs.modules.value.base16 = import ./module.nix;
     legacyPackages = {
       base16-templates = import ./packages/templates.nix;
     };
+    nixosModules.base16 = import ./nixos.nix;
+    nixosModule = "base16";
+    outputs.homeModules = {
+      value.base16 = import ./home.nix;
+      default = "base16";
+    };
+    outputs.modules.value.base16 = import ./module.nix;
   };
 }
