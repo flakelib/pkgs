@@ -29,6 +29,7 @@
   yggdrasil-address = import ./yggdrasil-address.nix;
   rustfmt-nightly = import ./rustfmt.nix;
   switch-lan-play = import ./switch-lan-play.nix;
+  parsec-bin = import ./parsec-bin.nix;
   adafruit-dht-python = import ./adafruit-dht.nix;
   dht22-exporter = import ./dht22-exporter.nix;
 }
