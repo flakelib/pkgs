@@ -33,6 +33,7 @@
   adafruit-dht-python = import ./adafruit-dht.nix;
   dht22-exporter = import ./dht22-exporter.nix;
 }
+// (import ./bolin)
 // (import ./droid.nix)
 // (import ./looking-glass)
 // (import ./crates)
