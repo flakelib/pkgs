@@ -26,6 +26,6 @@
 
   meta = {
     inherit (obs-studio.meta) platforms;
-    broken = lib.versionOlder obs-studio.version "27";
+    broken = lib.versionOlder obs-studio.version "27" || lib.versionAtLeast obs-studio.version "28";
   };
 }
