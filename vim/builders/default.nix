@@ -1,0 +1,3 @@
+{
+  buildVimSpell = ./mkspell.nix;
+}

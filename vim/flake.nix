@@ -6,6 +6,7 @@
   };
   outputs = { flakelib, ... }@inputs: flakelib {
     inherit inputs;
+    builders = import ./builders;
     packages = import ./packages.nix;
   };
 }
