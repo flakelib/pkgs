@@ -30,6 +30,7 @@
   switch-lan-play = import ./switch-lan-play.nix;
   mdns-scan = import ./mdns-scan.nix;
   firenvim-native = import ./firenvim-native.nix;
+  ddclient_3 = import ./ddclient.nix;
   adafruit-dht-python = import ./adafruit-dht.nix;
   dht22-exporter = import ./dht22-exporter.nix;
 }
