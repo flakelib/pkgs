@@ -5,7 +5,6 @@
     libPath = toString ./lib;
     command = "nix ${command}";
     impure = true;
-    meta.broken = name == "base16-check";
   };
   flake-check = name: path: nix "${name}-check" "flake check ./${path}";
   flakeNames = importJSON ./flakes.json;
@@ -27,7 +26,6 @@ in {
         fi
       '';
       inputs = map (flake: flake-check flake "./${flake}") flakeNames ++ [
-        (nix "base16-build" "build ./base16#base16-schemes")
       ];
     };
   };
