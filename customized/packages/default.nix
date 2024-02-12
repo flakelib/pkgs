@@ -536,6 +536,10 @@ let
       meta = old.meta or {} // {
         platforms = lib.platforms.linux;
       };
+
+      passthru = old.passthru or { } // {
+        ci.skip = "excessive";
+      };
     });
 
     scream-arc = { scream, fetchpatch, fetchFromGitHub, lib }: scream.overrideAttrs (old: {
