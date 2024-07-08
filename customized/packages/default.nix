@@ -247,7 +247,9 @@ let
       inherit FindPythonInterpreter;
 
       meta = old.meta or { } // {
-        broken = old.meta.broken or false;
+        # TODO: fix!
+        #broken = old.meta.broken or false;
+        broken = true;
       };
 
       patches = [ ];
@@ -456,10 +458,11 @@ let
       patches = old.patches or [ ] ++ [ ./mpd_clientlib-buffer.patch ];
     });
 
-    qemu-vfio = { qemu, fetchpatch, lib, fetchurl, perl }: (qemu.override {
+    qemu-vfio = { qemu, fetchpatch, lib, fetchurl, perl, python311Packages ? pythonPackages, pythonPackages }: (qemu.override {
       gtkSupport = false;
       smartcardSupport = false;
       smbdSupport = true;
+      python3Packages = python311Packages;
       hostCpuTargets = [
         "${qemu.stdenv.hostPlatform.qemuArch}-softmmu"
         "aarch64-linux-user" "aarch64-softmmu"
