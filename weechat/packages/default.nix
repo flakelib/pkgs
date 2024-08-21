@@ -1,17 +1,9 @@
 {
   weechat-matrix-python = import ./matrix-python.nix;
   weechat-matrix = { weechat-matrix-python, python3Packages, fetchFromGitHub }: with python3Packages; buildPythonApplication rec {
-    pname = "weechat-matrix";
-    version = "2022.09.08";
+    inherit (weechat-matrix-python) pname version src;
 
-    src = fetchFromGitHub {
-      owner = "poljar";
-      repo = "weechat-matrix";
-      rev = "989708d1fa8fcee6d5bbb4c19a7d66f14d84fd5b";
-      sha256 = "sha256-+SDjtaDm3H0T4xboqf+eycnto7z1tAkkbqRY29I4EaA=";
-    };
-
-    propagatedBuildInputs = [ requests matrix-nio ];
+    propagatedBuildInputs = [ requests weechat-matrix-python.matrix-nio or matrix-nio ];
 
     doCheck = false;
 
