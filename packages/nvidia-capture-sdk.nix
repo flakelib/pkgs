@@ -3,7 +3,6 @@
 , requireFile
 , unzip
 , msitools
-, nixpkgs
 }: with lib; stdenv.mkDerivation rec {
   pname = "nvidia-capture-sdk";
   version = if stdenv.isLinux

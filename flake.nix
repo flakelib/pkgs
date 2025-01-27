@@ -17,6 +17,14 @@
   };
   outputs = { flakelib, ... }@inputs: flakelib {
     inherit inputs;
+    systems = flakelib.lib.System.Supported.tier2 ++ [
+      {
+        name = "mingwW64-linux64";
+        localSystem = "x86_64-linux";
+        crossSystem = inputs.nixpkgs.lib.systems.elaborate inputs.nixpkgs.lib.systems.examples.mingwW64;
+      }
+    ];
+
     builders = import ./builders;
     packages = import ./packages;
     devShells = import ./ci/shells.nix;

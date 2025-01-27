@@ -14,7 +14,11 @@
   clip = import ./clip.nix;
   nvflash = import ./nvflash.nix;
   nvidia-vbios-vfio-patcher = import ./nvidia-vbios-vfio-patcher;
-  nvidia-capture-sdk = import ./nvidia-capture-sdk.nix;
+  nvidia-capture-sdk.__functor = _: import ./nvidia-capture-sdk.nix;
+  nvidia-capture-sdk.fl'config.args = {
+    unzip.offset = "build";
+    msitools.offset = "build";
+  };
   edfbrowser = import ./edfbrowser;
   mdloader = import ./mdloader.nix;
   muFFT = import ./mufft.nix;

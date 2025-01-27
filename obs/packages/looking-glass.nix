@@ -12,13 +12,8 @@
   inherit (looking-glass-host) src version;
   inherit (looking-glass-client) meta;
 
-  NIX_CFLAGS_COMPILE = looking-glass-client.NIX_CFLAGS_COMPILE or "-mavx"; # TODO fix?
-
   patches = [
-    (fetchpatch {
-      url = "https://github.com/arcnmx/LookingGlass/commit/f654f19606219157afe03ab5c5b965a28d3169ef.patch";
-      sha256 = "0g532b0ckvb3rcahsmmlq3fji6zapihqzd2ch0msj0ygjzcgkabw";
-    })
+    # singlethread: https://github.com/arcnmx/LookingGlass/commit/f654f19606219157afe03ab5c5b965a28d3169ef
     ./obs-installdir.patch
   ];
 
@@ -27,7 +22,7 @@
 
   cmakeFlags = [
     "-DOPTIMIZE_FOR_NATIVE=${if optimizeForArch == null then "OFF" else optimizeForArch}"
-    "-DENABLE_THREADS=${if enableThreading then "ON" else "OFF"}"
+    #"-DENABLE_THREADS=${if enableThreading then "ON" else "OFF"}"
     "../obs"
   ];
 
