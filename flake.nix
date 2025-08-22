@@ -2,7 +2,8 @@
   description = "arclib";
   inputs = {
     flakelib.url = "github:flakelib/fl";
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:arcnmx/nixpkgs-lib";
+    #nixpkgs.url = "github:NixOS/nixpkgs";
   };
   outputs = { flakelib, ... }@inputs: flakelib {
     inherit inputs;
