@@ -1,6 +1,24 @@
-{ lib, python3Packages, weechat-matrix, fetchFromGitHub, enableOlm ? true }:
+{ lib, python3Packages, weechat-matrix, fetchFromGitHub, enableOlm ? true, olm ? null }: let
+  logbook = python3Packages.logbook or python3Packages.Logbook;
+  # https://github.com/NixOS/nixpkgs/pull/347899
+  matrix-nio = python3Packages.matrix-nio // {
+    optional-dependencies = python3Packages.matrix-nio.optional-dependencies or {} // {
+      e2e = map mapE2eInput e2eInputs;
+    };
+  };
+  e2eInputs = python3Packages.matrix-nio.optional-dependencies.e2e or [
+    python3Packages.cachetools
+    python3Packages.python-olm
+    python3Packages.peewee
+  ];
+  olm'secure = olm.overrideAttrs (old: {
+    meta = builtins.removeAttrs olm.meta or {} [ "knownVulnerabilities" ];
+  });
+  mapE2eInput = input: if input.pname or null == "python-olm" && olm != null && input ? override
+    then input.override { olm = olm'secure; }
+    else input;
 
-with python3Packages; buildPythonPackage rec {
+in with python3Packages; buildPythonPackage rec {
   pname = "weechat-matrix";
   version = "2023.07.23";
   src = fetchFromGitHub {
@@ -19,7 +37,7 @@ with python3Packages; buildPythonPackage rec {
     webcolors
     atomicwrites
     attrs
-    pythonPackages.logbook or pythonPackages.Logbook
+    logbook
     pygments
     requests
     python_magic
@@ -27,11 +45,7 @@ with python3Packages; buildPythonPackage rec {
   ] ++ lib.optional (pythonOlder "3.5") typing
   ++ lib.optional (pythonOlder "3.2") future
   ++ lib.optional (pythonAtLeast "3.5") aiohttp
-  ++ lib.optionals enableOlm (matrix-nio.optional-dependencies.e2e or [
-    cachetools
-    python-olm
-    peewee
-  ]);
+  ++ lib.optionals enableOlm matrix-nio.optional-dependencies.e2e;
 
   passAsFile = [ "setup" ];
   setup = ''
