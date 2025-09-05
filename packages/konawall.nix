@@ -16,5 +16,7 @@
     platforms = platforms.linux;
   };
 
-  cargoHash = "sha256-zkVcKsh+LSHusu+pvBIqMn4YXdzQgMQtVDSMbs+Tlgw=";
+  cargoHash =
+    if lib.versionOlder lib.version "25.05" then "sha256-zkVcKsh+LSHusu+pvBIqMn4YXdzQgMQtVDSMbs+Tlgw="
+    else "sha256-whtZk+q+rC46rqqbaFaTCkyoMyfyQjyHa0EjYBNvHhM=";
 }
