@@ -2,6 +2,7 @@
   weechat-matrix-python = import ./matrix-python.nix;
   weechat-matrix = { weechat-matrix-python, python3Packages, fetchFromGitHub }: with python3Packages; buildPythonApplication rec {
     inherit (weechat-matrix-python) pname version src;
+    format = "setuptools";
 
     propagatedBuildInputs = [ requests weechat-matrix-python.matrix-nio or matrix-nio ];
 
